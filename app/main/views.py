@@ -6,7 +6,7 @@ from . import main
 from flask_login import current_user, login_required
 from .. import  photos, db
 from sqlalchemy import desc
-from ..models import Comment, User,Pitch
+from ..models import Comment, User
 
 @main.route('/user/<username>')
 def profile(username):
