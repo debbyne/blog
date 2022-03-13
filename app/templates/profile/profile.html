@@ -1,0 +1,10 @@
+<div class="col-md-4">
+    {% if user.profile_pic_path %}
+
+    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+
+    {%else%}
+    <p>No profile picture</p>
+
+    {% endif %}
+</div>
