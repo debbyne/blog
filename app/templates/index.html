@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+
+
+{%block styles%}
+{{super()}}
+<link href="https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+<div class="row">
+     <div class="display_quote">
+         {% if quote %}
+        {{quote.quote}}
+        {{quote.author}}
+         {% endif %}
+     </div>
+    <div class="blog-form">
+        <a href="{{url_for('main.newblog')}}"><button class="newpost" type="submit">Add New Post</button></a>
+        
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

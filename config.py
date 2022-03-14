@@ -17,11 +17,12 @@ class Config:
     @staticmethod
     def init_app(app):
         pass
+
 class ProdConfig(Config):
-    pass
-
-
+    SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URI','').replace("postgres://", "postgresql://", 1)
+   
 class DevConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:Access@localhost/blog'
     DEBUG = True
 
 config_options = {

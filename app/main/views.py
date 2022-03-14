@@ -6,7 +6,27 @@ from . import main
 from flask_login import current_user, login_required
 from .. import  photos, db
 from sqlalchemy import desc
-from ..models import Comment, User
+from ..models import Comment, User,Post
+from ..requests import get_quote
+
+@main.route('/')
+def index():
+    quote = get_quote()
+    posts = Post.query.all()
+    title = ' Blogs'
+    return render_template('index.html', title = title,quote = quote, posts = posts)
+
+@main.route('/new/blog/', methods = ['GET','POST'])
+@login_required
+def newblog():
+    form = NewBlogForm()
+    if form.validate_on_submit():
+        new_post = Post(title = form.title.data, content = form.post.data, user=current_user)
+        new_post.save_post()
+        post = Post.query.filter_by(title=new_post.title).first()
+        return redirect(url_for('main.index'))
+    
+    return render_template('newblog.html',form = form) 
 
 @main.route('/user/<username>')
 def profile(username):
