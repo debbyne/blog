@@ -9,21 +9,24 @@ from sqlalchemy import desc
 from ..models import Comment, User,Post,Quote
 from ..requests import get_quote
 
-@main.route('/')
+@main.route('/', methods = ['GET', 'POST'])
 def index():
     quote = get_quote()
     posts = Post.query.all()
     title = ' Blogs'
-
+  
     post = Post.query.filter_by(id = Post.id).first()
+    comments = Comment.get_comments(post)
     # user = User.query.filter_by(username = current_user).first()
     form = CommentForm()
     if form.validate_on_submit():
         comment = form.comment.data
 
-        new_comment = Comment(comment= comment ,post = post,user=current_user)
+        new_comment = Comment(comment = comment , user = current_user ,post = post.id)
+        db.session.add(new_comment)
         new_comment.save_comment()
-    return render_template('index.html', title = title,quote = quote, posts = posts,CommentForm = form)
+     
+    return render_template('index.html', title = title,quote = quote, comments = comments, posts = posts,CommentForm = form)
 
 @main.route('/new/blog/', methods = ['GET','POST'])
 @login_required
@@ -78,3 +81,4 @@ def blog():
         new_comment.save_comment()
 
     return render_template('blog.html' , post = post , CommentForm = form)
+

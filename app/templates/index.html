@@ -21,12 +21,15 @@
                    {{quote.author}}
                     {% endif %}
                 </div>
+            
                <div class="blog-form">
                    <a href="{{url_for('main.newblog')}}"><button class="newpost" type="submit">Add New Post</button></a>
                    
                </div>
                {% for post in posts %}
-               {{post.content}}
+               {{post.content}} <br>
+              
+
                {% if current_user.is_authenticated %}
     
 
@@ -36,10 +39,16 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         {{wtf.quick_form(CommentForm)}}
-                      
                     </div>
                 </div>
+
                    {% endif %}
+                   {% for comment in comments %}
+                   {{comment.comment}}
+                    <button class="del">
+                        Delete Comment
+                    </button> <br>
+                   {% endfor %}
                {%endfor%}
            </div>
            
@@ -59,10 +68,10 @@
         color: white;
     }
     .btn{
-      background-color: rgb(126, 94, 99);
+      background-color: rgb(175, 173, 173);
     }
     .navbar{
-        background-color: rgb(126, 94, 99);
+        background-color: rgb(143, 121, 125);
         color: white;
         border: none;
     }
@@ -70,10 +79,17 @@
     color: white;
     }
     .blog-form button{
-        background-color: rgb(126, 94, 99);
+        background-color:rgb(175, 173, 173);
         color: white;
         border: none;
         border-radius: 4px;
+    }
+    .dropdown{
+        color: white;
+    }
+    .dropdown del{
+        background-color: rgb(143, 121, 125);
+        color: white; 
     }
 </style>
 {% endblock %}

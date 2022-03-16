@@ -17,7 +17,7 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     post = db.relationship("Post", backref="user", lazy="dynamic")
-    comment = db.relationship("Comment", backref="user", lazy="dynamic")
+    comments = db.relationship("Comment", backref="user", lazy="dynamic")
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
 
@@ -48,12 +48,12 @@ class Comment(db.Model):
     @classmethod
     
     def save_comment(self):
-        db.session.add(self)
+      
         db.session.commit()
 
     @classmethod
     def get_comments(cls, id):
-        comments = Comment.query.filter_by(posts_id=id)
+        comments = Comment.query.filter_by(post_id = id)
         return comments
         
 class Quote:
