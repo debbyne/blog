@@ -5,7 +5,7 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 class NewBlogForm(FlaskForm):
     title = StringField('title', validators = [DataRequired()])
-    content = TextAreaField("", render_kw={"placeholder": "Type your story..."})
+    post = TextAreaField("", render_kw={"placeholder": "Type your story..."})
     submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):

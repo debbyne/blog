@@ -1,5 +1,8 @@
+
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
 
 
 {%block styles%}
@@ -7,20 +10,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap" rel="stylesheet">
 {% endblock %}
 {% block content %}
-<div class="container-fluid">
-<div class="row">
-     <div class="display_quote">
-         {% if quote %}
-        {{quote.quote}}
-        {{quote.author}}
-         {% endif %}
-     </div>
-    <div class="blog-form">
-        <a href="{{url_for('main.newblog')}}"><button class="newpost" type="submit">Add New Post</button></a>
-        
-    </div>
-</div>
+<div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="display_quote">
+                    <div class="display_quote">
+                    {% if quote %}
+                   {{quote.quote}}
+                   {{quote.author}}
+                    {% endif %}
+                </div>
+               <div class="blog-form">
+                   <a href="{{url_for('main.newblog')}}"><button class="newpost" type="submit">Add New Post</button></a>
+                   
+               </div>
+               {% for post in posts %}
+               {{post.content}}
+               {% if current_user.is_authenticated %}
+                   {{wtf.quick_form(CommentForm)}}
+                   {% endif %}
+               {%endfor%}
+           </div>
+           
+            <div class="col-md-3"></div>
+        </div>
+            
 
+       
 </div>
 
 {% endblock %}

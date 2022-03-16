@@ -14,7 +14,7 @@ git clone https://github.com/debbyne/blog.git/
  code .
  
 # Running Application
- Create a start.sh file
+Create a start.sh file
 chmod a+x start.sh
 start.sh
 
