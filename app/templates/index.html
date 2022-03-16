@@ -15,7 +15,7 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div class="display_quote">
-                    <div class="display_quote">
+                    <div class="display-quote">
                     {% if quote %}
                    {{quote.quote}}
                    {{quote.author}}
@@ -45,9 +45,11 @@
                    {% endif %}
                    {% for comment in comments %}
                    {{comment.comment}}
-                    <button class="delete_btn">
-                        Delete Comment
-                    </button> <br>
+                   <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Delete Comments <br>
+                    </button>
+                        
+                    
                    {% endfor %}
                {%endfor%}
            </div>
@@ -58,10 +60,11 @@
 
        
 </div>
+</div>
 <style>
     *{
         font-family: 'Lobster Two', cursive;
-        font-size: 24px;
+        font-size: 28px;
     }
     body{
         background-color: rgb(31, 126, 126);
@@ -87,9 +90,8 @@
     .dropdown{
         color: white;
     }
-    .dropdown delete-btn{
-        background-color: rgb(143, 121, 125);
-        color: white; 
+    .display_quote{
+        background-color: rgb(175, 173, 173);
     }
 </style>
 {% endblock %}
