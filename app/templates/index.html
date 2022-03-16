@@ -7,7 +7,7 @@
 
 {%block styles%}
 {{super()}}
-<link href="https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -28,7 +28,17 @@
                {% for post in posts %}
                {{post.content}}
                {% if current_user.is_authenticated %}
-                   {{wtf.quick_form(CommentForm)}}
+    
+
+                <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Comments
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {{wtf.quick_form(CommentForm)}}
+                      
+                    </div>
+                </div>
                    {% endif %}
                {%endfor%}
            </div>
@@ -39,5 +49,31 @@
 
        
 </div>
-
+<style>
+    *{
+        font-family: 'Lobster Two', cursive;
+        font-size: 17px;
+    }
+    body{
+        background-color: rgb(31, 126, 126);
+        color: white;
+    }
+    .btn{
+      background-color: rgb(126, 94, 99);
+    }
+    .navbar{
+        background-color: rgb(126, 94, 99);
+        color: white;
+        border: none;
+    }
+    .navbar a{
+    color: white;
+    }
+    .blog-form button{
+        background-color: rgb(126, 94, 99);
+        color: white;
+        border: none;
+        border-radius: 4px;
+    }
+</style>
 {% endblock %}
